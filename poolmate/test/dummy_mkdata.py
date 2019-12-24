@@ -1,4 +1,3 @@
-import string
 import numpy as np
 from sklearn.datasets import make_classification
 
@@ -12,4 +11,4 @@ x, y = make_classification(n,
 z = np.hstack((np.reshape(y, (1000, 1)), x))
 
 for r in z:
-    print string.join(map(str, r.tolist()), sep=', ')
+    print(', '.join(map(str, r.tolist())))

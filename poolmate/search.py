@@ -9,7 +9,8 @@ import re
 import sys
 import scipy
 import string
-import StringIO
+import io
+
 
 class Algorithm(object):
     def __init__(self,
@@ -85,7 +86,7 @@ class RandomIndexGreedySwap(Algorithm):
         else:
             rng = range(self.pool_size)
         for n in reversed(rng):
-            ns = base_set[0:idx] + [n] + base_set[idx+1:]
+            ns = base_set[0:idx] + [n] + base_set[idx + 1:]
             self.models_to_fetch.append(ns)
 
     def next_fit_request(self):
@@ -180,6 +181,7 @@ class GreedyAdd(Algorithm):
                                  self.current_loss,
                                  self.current_set)
 
+
 class Result(object):
     def __init__(self):
         self.best_model = None
@@ -213,7 +215,7 @@ class Runner(object):
                                         options.teaching_set_size,
                                         options.initial_teaching_set)
         else:
-            msg = 'Algorithm %s not recognized' % (options.algorithm)
+            msg = 'Algorithm %s not recognized' % options.algorithm
             raise Exception(msg)
         return algorithm
 
@@ -237,9 +239,9 @@ class Runner(object):
             m = learner.fit([instance[x] for x in s])
             l = learner.loss(m)
             if log:
-                log.write("%d, %f, %s\n" % (i,l,string.join(map(str,s),' ')))
+                log.write("%d, %f, %s\n" % (i, l, ' '.join(map(str, s))))
             algorithm.next_fit_result(m, l, s)
-        if log and not isinstance(log, StringIO.StringIO):
+        if log and not isinstance(log, io.StringIO):
             log.close()
 
-        return (algorithm.best_loss, algorithm.best_set)
+        return algorithm.best_loss, algorithm.best_set

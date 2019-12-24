@@ -28,7 +28,7 @@ class Logger(object):
             args.update(self.bound_args)
             self.cache[event].append(args)
         if event in self.whitelist_log or self.show_all:
-            print event, args
+            print(event, args)
 
     def bind(self, **args):
         """ Returns copy of logger. Subclasses must override """

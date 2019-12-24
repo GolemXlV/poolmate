@@ -31,5 +31,6 @@ def inline(inputfile, outputfile):
         l = zero_one_loss(eval_y, pred_y)
         f.write(str(l))
 
+
 if __name__ == "__main__":
     inline(sys.argv[1], sys.argv[2])

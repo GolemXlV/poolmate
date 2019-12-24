@@ -32,7 +32,7 @@ class OptionsBuilder(object):
 def write_options(options, log):
     options = dict(vars(options))
     excluded = ['rs', 'no_progress', 'num_train']
-    print options
+    print(options)
     for key in options:
         if key not in excluded:
             log.write("%s=%s\n" % (key, options[key]))

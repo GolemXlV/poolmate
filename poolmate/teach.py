@@ -80,12 +80,12 @@ class ProcessLearner(object):
             self.output_filename
         error_code = subprocess.call(shell_cmd.split(' '))
         if error_code != 0:
-            print "Child process returned with error code %s" % error_code
+            print("Child process returned with error code %s" % error_code)
             sys.exit(-1)
         if not os.path.exists(self.output_filename):
             raise Exception('Output file not written')
         with open(self.output_filename) as f:
-            self.loss_ = float(string.strip(f.readline()))
+            self.loss_ = float(str.strip(f.readline()))
         os.remove(self.input_filename)
         os.remove(self.output_filename)
         return None

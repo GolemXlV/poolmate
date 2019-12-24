@@ -1,5 +1,5 @@
 import numpy as np
-import StringIO
+import io
 
 from poolmate.teach import Runner, SVMLearner, build_options
 from sklearn.datasets import make_classification
@@ -47,12 +47,12 @@ def test_log_stream():
     z = make_example()
     runner = Runner()
     learner = SVMLearner(z)
-    log = StringIO.StringIO()
+    log = io.StringIO()
     options = build_options(search_budget=10,
                             teaching_set_size=2,
                             log=log)
     best_loss, best_set = runner.run_experiment(z, learner, options)
-    print best_set, best_loss
+    print(best_set, best_loss)
 
 # is this exactly like other api?
   # no this wrapper isn't taking indices
